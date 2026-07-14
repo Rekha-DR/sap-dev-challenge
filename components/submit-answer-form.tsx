@@ -3,6 +3,7 @@
 import { useState, type FormEvent } from "react"
 import { Loader2, CheckCircle2, AlertCircle } from "lucide-react"
 import { Button } from "@/components/ui/button"
+import { SapLogo } from "@/components/sap-logo"
 import { cn } from "@/lib/utils"
 
 const ENDPOINT = "/api/submit-answer"
@@ -100,17 +101,22 @@ export function SubmitAnswerForm() {
   const isLoading = status === "loading"
 
   const inputClasses =
-    "w-full rounded-md border border-input bg-background px-3 py-2 text-sm text-foreground shadow-sm transition-colors placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-50"
+    "w-full rounded-xl border border-input bg-card px-4 py-2.5 text-sm text-foreground transition-colors placeholder:text-muted-foreground focus-visible:outline-none focus-visible:border-ring focus-visible:ring-2 focus-visible:ring-ring/30 disabled:cursor-not-allowed disabled:opacity-50"
 
   return (
-    <div className="w-full max-w-md rounded-xl border border-border bg-card p-6 shadow-sm sm:p-8">
-      <div className="mb-6 space-y-1.5">
-        <h1 className="text-xl font-semibold text-card-foreground text-balance">
-          Submit Your Answer
-        </h1>
-        <p className="text-sm leading-relaxed text-muted-foreground text-pretty">
-          Enter your SAP Community details and answer for this week&apos;s challenge.
-        </p>
+    <div className="w-full max-w-md rounded-3xl border border-border bg-card p-8 shadow-[0_2px_24px_rgba(0,0,0,0.06)] sm:p-10">
+      <div className="mb-8 flex flex-col items-center gap-4 text-center">
+        <div className="flex size-14 items-center justify-center rounded-2xl bg-accent">
+          <SapLogo className="h-7 w-7 text-primary" />
+        </div>
+        <div className="space-y-1.5">
+          <h1 className="text-2xl font-semibold tracking-tight text-card-foreground text-balance">
+            Submit Your Answer
+          </h1>
+          <p className="text-sm leading-relaxed text-muted-foreground text-pretty">
+            Enter your SAP Community details and answer for this week&apos;s challenge.
+          </p>
+        </div>
       </div>
 
       <form onSubmit={handleSubmit} noValidate className="flex flex-col gap-5">
@@ -151,7 +157,7 @@ export function SubmitAnswerForm() {
             aria-invalid={Boolean(errors.week)}
             aria-describedby={errors.week ? "week-error" : undefined}
             className={cn(inputClasses, errors.week && "border-destructive focus-visible:ring-destructive")}
-            placeholder="e.g. Week 1"
+            placeholder="e.g. Week1"
           />
           {errors.week && (
             <p id="week-error" className="text-sm text-destructive">
@@ -203,7 +209,11 @@ export function SubmitAnswerForm() {
           </div>
         )}
 
-        <Button type="submit" disabled={isLoading} className="w-full">
+        <Button
+          type="submit"
+          disabled={isLoading}
+          className="mt-1 w-full rounded-full py-2.5 text-sm font-medium transition-transform active:scale-[0.98]"
+        >
           {isLoading && <Loader2 className="size-4 animate-spin" aria-hidden="true" />}
           {isLoading ? "Submitting..." : "Submit"}
         </Button>
