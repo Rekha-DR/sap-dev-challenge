@@ -5,7 +5,7 @@ import { Loader2, CheckCircle2, AlertCircle } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { cn } from "@/lib/utils"
 
-const ENDPOINT = "https://community-challenge.cfapps.us10.hana.ondemand.com/odata/v4/submitAnswer"
+const ENDPOINT = "/api/submit-answer"
 
 type FieldName = "communityId" | "week" | "answer"
 
@@ -77,8 +77,10 @@ export function SubmitAnswerForm() {
         }),
       })
 
+      const result = await response.json().catch(() => ({}))
+
       if (!response.ok) {
-        throw new Error(`Request failed with status ${response.status}`)
+        throw new Error(result?.error || `Request failed with status ${response.status}`)
       }
 
       setStatus("success")
