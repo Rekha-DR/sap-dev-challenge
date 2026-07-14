@@ -157,7 +157,7 @@ export function SubmitAnswerForm() {
             aria-invalid={Boolean(errors.week)}
             aria-describedby={errors.week ? "week-error" : undefined}
             className={cn(inputClasses, errors.week && "border-destructive focus-visible:ring-destructive")}
-            placeholder="e.g. Week 1"
+            placeholder="e.g. Week1"
           />
           {errors.week && (
             <p id="week-error" className="text-sm text-destructive">
